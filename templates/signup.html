@@ -1,0 +1,38 @@
+{% extends 'blog\base.html' %}
+
+{% block main %}
+
+<div class="page-wrapper  p-t-130 p-b-100 font-poppins">
+  <h2 class="title">فرم ثبت نام</h2>
+  <div class="wrapper wrapper--w680">
+      <div class="card card-4 ">
+          <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="row row-space">
+                  {% for field in form %}
+                  <div class="col-6">
+                        <div class="input-group">
+                            <label class="label"> {{ field.label_tag }}
+                              
+                              {% if field.help_text %}
+                              <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                              {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                              {% endfor %}</label>
+                            <div class="input--style-4" >{{field}}</div>
+                        </div>
+                    </div> 
+                    {%endfor%}  
+                </div>
+                <div class="p-t-15">
+                    <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                </div>
+                
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

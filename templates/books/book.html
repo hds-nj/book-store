@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block main %}
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 id="title-post">{{book.name}}</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">خانه</a>
+                        <a href="/pcategory/{{book.category_to_sl}}">{{book.category_to_str}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+        <!-- Single Post Start-->
+        <div class="single">
+            <div class="container">
+                <div class="row">
+                       <div class="col-lg-4 ">
+                            <div class="product-img ">
+                               <img  src="{{book.picture.url}}">           
+                            </div> 
+                       </div>
+                       <div class="col-lg-8 ">
+                           <div class="product-content">
+                                    <h2>{{book.name}}</h2>
+                                    <p > {{book.ShortSpecifications}}</p>
+                                 <div class="single-tags">
+                                     <a href="/pcategory/{{book.category_to_sl}}">{{book.category_to_str}}</a>
+                                     <a href="">علمی</a>
+                                 </div>
+                           </div>
+                       </div>
+                </div>
+            </div>    
+            <div class="container">
+                    <div class="row">
+                        
+              {%  include 'side-bar.html'%}
+                </div>
+            </div>
+        </div>
+        <!-- Single Post End-->   
+   {% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+<title>{{product.title}}</title>
+{% block main %}
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 id="title-post">{{product.name}}</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">خانه</a>
+                        <a href="/pcategory/{{product.category_to_sl}}">{{product.category_to_str}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+        <!-- Single Post Start-->
+        <div class="single">
+            <div class="container">
+                <div class="row">
+                       <div class="col-lg-4 ">
+                            <div class="product-img ">
+                               <img  src="{{product.image.url}}">           
+                            </div> 
+                       </div>
+                       <div class="col-lg-8 ">
+                           <div class="product-content">
+                                    <h2>{{product.name}}</h2>
+                                    <p > {{product.description}}</p>
+                                 <div class="single-tags">
+                                     <a href="/pcategory/{{product.category_to_sl}}">{{product.category_to_str}}</a>
+                                 </div>
+                           </div>
+                       </div>
+                </div>
+            </div>    
+            <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="single-comment">  
+                                <h2>نظرات</h2>
+                                <ul class="comment-list">
+                                    <li class="comment-item">
+                                        <div class="comment-body">
+                                            <div class="comment-img">
+                                                <img src="" />
+                                            </div>
+                                            <div class="comment-text">
+                                                <h3><a href="">محسن</a></h3>
+                                                <p><span>{{article.jpublish}}</span></p>
+                                                <p>
+                                                    لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد.
+                                                </p>
+                                                <a class="btn" href="">پاسخ</a>
+                                            </div>
+                                        </div>
+                                       
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="comment-form">
+                                <h2>نظر دهید</h2>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">نام کاربری *</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">ایمیل  *</label>
+                                        <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="website">وب سایت</label>
+                                        <input type="url" class="form-control" id="website">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">پیام *</label>
+                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="پست" class="btn btn-custom">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+              {%  include 'side-bar.html'%}
+                </div>
+            </div>
+        </div>
+        <!-- Single Post End-->   
+   {% endblock %}

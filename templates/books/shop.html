@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block main %}
+        
+        
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 id="title">فروشگاه</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">خانه</a>
+                        <a href="">فروشگاه</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+        
+        <!-- Blog Start -->
+        <div class="blog">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>فروشگاه</p>
+                    <h2>آخرین محصولات</h2>
+                </div>
+                <div class="row">
+                    {% for p in products %}
+                    <div class="col-lg-4">
+                        <img class="thumbnail" src="{{p.image.url}}">
+                        <div class="box-element product">
+                            <h6><strong>{{p.name}}</strong></h6>
+                            <hr>
+                                        <form id="form-{{ product.slug }}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product" value="{{ product.id }}">
+                                        </form>
+                                            <a href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+                                        <button class="btn btn-success disabled">
+                                             <i class="gb gb_highlight_off"></i>
+                                        </button>
+                            <a class="btn btn-outline-success" href="/{{p.slug}}">View</a>
+                            <h4 style="display: inline-block "><strong>{{p.price}}</strong></h4>
+            
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+              
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="pagination justify-content-center">
+                             {% if productsList.has_previous %} 
+                            <li class="page-item disabled"><a class="page-link" href="#">قبلی</a></li>
+                             {% endif %}
+                            {% for i in paginator%}
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            {% endfor %}
+                            {% if productsList.has_next %}
+                            <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
+                            {% endif %}
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog End -->
+
+{% endblock %}
+{% block extra_js %}
+<script>
+function AddCart(slug) {
+    $.post(`/product/${slug}`, $(`#form-${slug}`).serialize(), function(data) {
+        alert(data.msg);
+        $(`#${slug}`).modal('hide');
+    })
+}
+</script>
+{% endblock  %}

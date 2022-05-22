@@ -1,0 +1,36 @@
+
+
+
+<a href="#"><button>Edit Profile</button></a>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+   پروفایل کاربری
+
+{% block main %}
+<div class="col-md-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title mb-0 float-left">پروفایل کاربری {{request.user.username}}</h3>
+        </div>
+    <div class="card-body">    
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">
+               
+                <div class="col-6">
+                    {{profile.user.username}}
+                </div>
+                <div class="col-6">
+                    {{profile.user.email}}
+                </div>
+               
+                <div class="col-6">
+                    <label class = "my-4">ویرایش </label>
+                    <span>برای  ویرایش کنید <a href="{% url 'account:edit' %}">کلیک </a>کنید.</span>
+                </div>
+                
+            </div>
+            <button class="btn btn-success">ویرایش اطلاعات</button>
+        </div>
+    </form>
+{% endblock %}
