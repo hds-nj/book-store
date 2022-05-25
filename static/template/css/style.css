@@ -8,7 +8,6 @@
     font-weight: bold;
     src: url('../fonts/IRANSansWeb_Bold.eot');
     src: url('../fonts/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IRANSans-Bold-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
          url('../fonts/IRANSans-Bold-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
          url('../fonts/IRANSans-Bold-web.ttf') format('truetype');
 }
@@ -18,7 +17,6 @@
     font-weight: 500;
     src: url('../fonts/IRANSansWeb_Medium.eot');
     src: url('../fonts/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IRANSansWeb_Medium.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
          url('../fonts/IRANSansWeb_Medium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
          url('../fonts/IRANSansWeb_Medium.ttf') format('truetype');
 }
@@ -37,7 +35,6 @@
     font-weight: 200;
     src: url('../fonts/IRANSansWeb_UltraLight.eot');
     src: url('../fonts/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IRANSansWeb_UltraLight.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
          url('../fonts/IRANSansWeb_UltraLight.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
          url('../fonts/IRANSansWeb_UltraLight.ttf') format('truetype'),
 }
@@ -48,7 +45,6 @@
     font-weight: normal;
     src: url('../fonts/IRANSansWeb.eot');
     src: url('../fonts/IRANSansWeb.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IRANSansWeb.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
          url('../fonts/IRANSansWeb.woff') format('woff');
 }
 body {
@@ -57,8 +53,25 @@ body {
     background: #ffffff;
     font-family: IRANSans ,'Barlow', sans-serif;
 }
+.book h6 , h4{
+text-align: center;
+}
+.book-img img{
+    width: 100%;
+    border-radius: 5px;
+}
+.card-header{
+    margin-right: 300px;
+   margin-top: 50px;
+   padding-left: 30px;
+   padding-right: 30px;
+}
 
-
+.loginform{
+    text-align: right;
+    padding-top: 30px;
+    padding-right: 300px;
+}
 h1,
 h2, 
 h3, 
@@ -138,7 +151,9 @@ a {
     color: #202C45;
     transition: .3s;
 }
-
+.nav-lik a{
+    color :#ffffff
+}
 a:hover,
 a:active,
 a:focus {
@@ -147,6 +162,12 @@ a:focus {
     text-decoration: none;
 }
 
+#checout{
+    padding-top: 100px;
+}
+#nav-link{
+    color :#ffffff
+}
 .btn.btn-custom {
     padding: 10px 30px 12px 30px;
     text-align: center; 
@@ -379,7 +400,7 @@ a:focus {
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
-    color: #E81C2E;
+    color: #ffffff;
 }
 
 .nav-bar .dropdown-menu {
@@ -747,193 +768,6 @@ a:focus {
     margin: 0;
 }
 
-
-/*******************************/
-/******** Location CSS *********/
-/*******************************/
-.location {
-    position: relative;
-    width: 100%;
-    padding: 45px 0;
-}
-
-.location .location-item {
-    display: flex;
-    margin-bottom: 30px;
-}
-
-.location .location-item i {
-    padding-top: 3px;
-    font-size: 30px;
-    color: #E81C2E;
-}
-
-.location .location-text {
-    padding-left: 15px;
-}
-
-.location .location-text h3 {
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.location .location-text p {
-    margin-bottom: 5px;
-}
-
-.location .location-text p strong {
-    margin-right: 5px;
-    font-weight: 600;
-}
-
-.location .location-form {
-    padding: 45px 30px;
-    background: #E81C2E;
-    border-radius: 5px;
-}
-
-.location .location-form h3 {
-    color: #ffffff;
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 25px;
-}
-
-.location .location-form .control-group {
-    margin-bottom: 15px;
-}
-
-.location .location-form .form-control {
-    height: 45px;
-    color: #ffffff;
-    padding: 0 15px;
-    border-radius: 5px;
-    border: 1px solid #ffffff;
-    background: transparent;
-}
-
-.location .location-form textarea.form-control {
-    height: 120px;
-    padding: 15px;
-}
-
-.location .location-form .form-control::placeholder {
-    color: #ffffff;
-    opacity: 1;
-}
-
-.location .location-form .form-control:-ms-input-placeholder,
-.location .location-form .form-control::-ms-input-placeholder {
-    color: #ffffff;
-}
-
-.location .location-form .btn.btn-custom {
-    width: 100%;
-    color: #E81C2E;
-    background: #ffffff;
-    box-shadow: inset 0 0 0 0 #202C45;
-}
-
-.location .location-form .btn.btn-custom:hover {
-    color: #ffffff;
-    background: #E81C2E;
-    box-shadow: inset 400px 0 0 0 #202C45;
-}
-
-@media(min-width: 576px) and (max-width: 991.89px) {
-    .location .location-form .btn.btn-custom:hover {
-        box-shadow: inset 650px 0 0 0 #202C45;
-    }
-}
-
-
-/*******************************/
-/*********** Team CSS **********/
-/*******************************/
-.team {
-    position: relative;
-    width: 100%;
-    padding: 45px 0 15px 0;
-}
-
-.team .team-item {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.team .team-img {
-    position: relative;
-    border-radius: 5px 5px 0 0;
-    overflow: hidden;
-}
-
-.team .team-img img {
-    width: 100%;
-    transition: .3s;
-}
-
-.team .team-item:hover img {
-    transform: scale(1.1);
-}
-
-.team .team-text {
-    position: relative;
-    width: 100%;
-    padding: 35px 30px 30px 30px;
-    text-align: center;
-    background: #202C45;
-    border-radius: 0 0 5px 5px;
-    transition: .5s;
-}
-
-.team .team-item:hover .team-text {
-    background: #E81C2E;
-}
-
-.team .team-text h2 {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-.team .team-text p {
-    margin: 0;
-    color: #ffffff;
-}
-
-.team .team-social {
-    position: absolute;
-    width: 100%;
-    height: 40px;
-    top: -20px;
-    left: 0;
-    text-align: center;
-    font-size: 0;
-}
-
-.team .team-social a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: 0 3px;
-    padding: 7px 0;
-    text-align: center;
-    font-size: 16px;
-    color: #ffffff;
-    background: #202C45;
-    border-radius: 40px;
-    transition: .5s;
-}
-
-.team .team-item:hover .team-social a {
-    background: #E81C2E;
-}
-
-.team .team-social a:hover {
-    color: #202C45;
-}
 
 
 /*******************************/
@@ -1941,4 +1775,8 @@ padding-top: 20px;
 .footer .copyright p a:hover {
     color: #ffffff;
    
+}
+#profile {
+    text-align: right;
+    padding-top: 20px;
 }

@@ -28,4 +28,5 @@ class ProductsAdmin(admin.ModelAdmin):
     def category_to_str(self , obj):
             return ",".join([Category.title for Category in obj.category.all()])
     category_to_str.short_description = "دسته بندی"
-admin.site.register(Product, ProductsAdmin)
+admin.site.register(Order)
+admin.site.register(OrderItem)

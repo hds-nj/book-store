@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from product.models import Product , Review
+from product.models import Product 
 # from orders.models import Order,OrderItem
 
 
@@ -40,10 +40,7 @@ class UserSerializerWithToken(UserSerializer):
         return str(token.access_token)
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = '__all__'
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -53,8 +50,5 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
-    def get_reviews(self, obj):
-        reviews = obj.review_set.all()
-        serializer = ReviewSerializer(reviews, many=True)
-        return serializer.data
+
 

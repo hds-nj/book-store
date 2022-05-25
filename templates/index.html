@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block main %}
 
         <!-- About Start -->
@@ -7,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="about-img">
-                            <img src="" alt="Image">
+                            <img src="{% static 'template/img/index.jpg'%}" alt="Image">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -17,13 +18,14 @@
                         </div>
                         <div class="about-content">
                             <p>
-                                لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد.
-                            </p>
+                            دموی سایت فروشگاه کتاب با قابلیت های مدیریت کاربران که به دو دسته ی مدیر فروشگاه و مشتریان تقسیم می شوند 
+                               این سیستم قابلیت احراز هویت داشته و هر کاربر تنها می تواند به اطلاعات شخصی خود دسترسی داشته باشد و همچنین امکان ویرایش اطلاعات شخصی خود را نیز دارد .                    
+                        </p>
                             <ul>
-                                <li><i class="far fa-check-circle"></i>بهینه</li>
-                                <li><i class="far fa-check-circle"></i>سریع</li>
-                                <li><i class="far fa-check-circle"></i>ایمن</li>
-                                <li><i class="far fa-check-circle"></i>استاندارد</li>
+                                <li><i class="far fa-check-circle"></i>ایجاد پروفایل به صورت اتوماتیک</li>
+                                <li><i class="far fa-check-circle"></i>ویرایش پروفایل</li>
+                                <li><i class="far fa-check-circle"></i>تغییر پسورد</li>
+                                <li><i class="far fa-check-circle"></i> ریست پسورد</li>
                             </ul>
                             <a class="btn btn-custom" href="">جزئیات بیشتر</a>
                         </div>
@@ -43,23 +45,26 @@
                          <h2>جدیدترین کتاب ها</h2>
                 </div>
                 <div class="row">
-                   
+                   {% for p in products %}
                     <div class="col-lg-4">
-                        <div class="blog-item">
+                        <div class="box-element product">
                             <div class="blog-img">
-                                <img src="" alt="Image">
+                                <img src="{{p.image.url}}" alt="Image">
                               
                             </div>
+                            
                             <div class="blog-text">
-                                <h3><a href=""></a></h3>
+                                <h3><a href="{{p.slug}}"></a>{{p.name}}</h3>
                             </div>
+                            <hr>
                             <div class="blog-meta">
-                                <p><i class="fa fa-folder"></i><a href=""></a></p>
-                                <p><i class="fa fa-comments"></i><a href=""></a></p>
+                                <button  data-product="{{p.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">خرید</button>
+                                <a class="btn btn-outline-success" href="/{{p.slug}}">جزئیات</a>
+                                <a class="btn btn-outline-secondary" href="/{{p.category_to_sl}}">{{p.category_to_str}}</a>
                             </div>
                         </div>
                     </div>
-                
+                {% endfor %}
                 </div>
             </div>
         </div>

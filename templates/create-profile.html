@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block main%}
+
+profile page
+{% if user.is_authenticated %}
+<h1> Create Profile </h1>
+<br/>
+<div class= "form-group">
+    <form methode = "POST" enctype="multipart/form-data">
+     {% csrf_token %}
+     {{form.as_p}}
+     <button class="btn btn-secodary" click(create_profile)> Create Profile </button>
+    </form>
+</div>
+{% else %}
+<h3> دسترسی به این بخش را ندارید</h3>
+{% endif %}
+{% endblock %}

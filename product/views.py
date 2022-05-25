@@ -1,29 +1,98 @@
 
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect ,get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from urllib import request
-from .models import Product , Category , Cart , CartItem
+from .models import OrderItem, Product , Category , Order 
 from account.models import Profile
-from django.shortcuts import render, get_object_or_404 , redirect
+from django.contrib.auth.models import User
+from .models import Profile
+import json
+
 # Create your views here.
 def home (request):
-    return render(request, "index.html")
-
+    category = Category.objects.all()
+    products=Product.objects.all()
+    if request.user.is_authenticated:
+       user = request.user
+       order, created = Order.objects.get_or_create(customer=user , complete=False)
+       items = order.orderitem_set.all()
+       cartItem = order.get_cart_items
+    else:
+       items = [] 
+       order = {'get_card_total':0 ,'get_cart_items':0}
+       cartItem = order['get_cart_items']
+    
+    return render(request, "index.html" , {'category':category ,'products':products,'cartItem':cartItem ,'items':items})
 def shop(request , page=1):
-       products=Product.objects.all()
-       paginator =Paginator(products,4)
-       productsList = paginator.get_page(page)
-       context={
-           'products':products ,'productsList':productsList
-       }
-       return render(request,"books/shop.html",context)
-       
+        if request.user.is_authenticated:
+           user = request.user
+           order, created = Order.objects.get_or_create(customer=user , complete=False)
+           items = order.orderitem_set.all()
+           cartItem = order.get_cart_items
+        else:
+            items = [] 
+            order = {'get_card_total':0 ,'get_cart_items':0}
+            cartItem = order['get_cart_items']
+            
+        products=Product.objects.all()
+        paginator =Paginator(products,4)
+        productsList = paginator.get_page(page)
+        context={
+           'products':products ,'productsList':productsList ,'cartItem':cartItem ,'items':items
+        }
+        return render(request,"books/shop.html",context)
+
+
+def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user
+        order,created = Order.objects.get_or_create(customer=customer , complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
+    else:
+        order = {'get_card_total':0 ,'get_cart_items':0}
+        items = []    
+    context ={'items':items , 'order':order , 'cartItem':cartItem}
+    return render(request , 'books/cart.html' , context )       
+
+def checkout(request):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer , complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []    
+    context ={'items':items}
+    return render(request , 'books/checkout.html' , context )     
+
+
+@login_required(login_url='login')
+
+def updateItem(request):
+    decoded_data = request.body.decode('utf-8')
+    data = json.loads(decoded_data)
+    productId = data['productId']
+    action = data['action']
+    print('Action:' , action)
+    print('Product:', productId)
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    order , created =Order.objects.get_or_create(customer=customer , complete = False)
+    orderItem,created = OrderItem.objects.get_or_create(order = order , product = product)
+    if action =='add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+    orderItem.save() 
+    if orderItem.quantity <= 0:
+        orderItem.delete()   
+    return JsonResponse('Item was added' , safe =False)
+
+
 def product(request , slug):  
        context= {
-           "product" : Product.objects.get(slug =slug ),
+           "product" : Product.objects.get(slug=slug),
            "category" : Category.objects.all()
        }
        return render (request , "books/product.html" , context )
@@ -35,91 +104,7 @@ def category(request , slug):
     }
     return render(request , "books/book-category.html" , context)
 
-@login_required(login_url='login')
-def checkout(request):
-    if request.method == 'GET':
-        _cart = dict()
-        profile = Profile.objects.filter(user=request.user)[0]
-        cart = list(filter(lambda x: x.is_active, Cart.objects.filter(profile=profile)))
-        if len(cart) > 0:
-            cart_items = CartItem.objects.filter(cart=cart[0])[::1]
-            total = sum([cart_item.quantity * cart_item.good.price for cart_item in cart_items])
-            discount = total - cart[0].total
-            cart_total = cart[0].total + 50
-            _cart['total'] = total
-            _cart['discount'] = discount
-            _cart['cart_total'] = cart_total
-        else:
-            cart_items = []
-    else:
-        cart_items = []
-    goods = Product.objects.filter(featured=True)[:3]
-    categories = Category.objects.all()[::1]
-    return render(request, 'checkout.html', {'cart_items': cart_items, 'goods': goods, 'categories': categories, 'cart': _cart})
 
-@login_required(login_url='login')
-@csrf_protect
-def remove(request):
-    if request.method == "POST" and request.user.is_authenticated:
-        profile = Profile.objects.filter(user=request.user)[0]
-        cart = list(filter(lambda x: x.is_active, Cart.objects.filter(profile=profile)))
-        if len(cart) > 0:
-            item = CartItem.objects.get(id=request.POST.get('id'))
-            item.cart.total -= item.quantity * item.good.price
-            item.cart.save()
-            if item is not None:
-                item.delete()
-        return HttpResponse()
-    else:
-        return HttpResponseBadRequest()
-
-@login_required(login_url='login')
-@csrf_protect
-def remove_all(request):
-    if request.method == "GET" and request.user.is_authenticated:
-        profile = Profile.objects.filter(user=request.user)[0]
-        cart = list(filter(lambda x: x.is_active, Cart.objects.filter(profile=profile)))
-        if len(cart) > 0:
-            for item in CartItem.objects.filter(cart=cart[0]):
-                item.delete()
-            cart[0].total = 0
-            cart.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-        return HttpResponseBadRequest()
-
-@login_required(login_url='login')
-def add(request):
-    if request.method == "POST" and request.user.is_authenticated:
-        profile = Profile.objects.filter(user=request.user)[0]
-        cart = list(filter(lambda x: x.is_active, Cart.objects.filter(profile=profile)))
-        cartItem = CartItem()
-        if len(cart) > 0:
-            cartItem.cart = cart[0]
-        else:
-            cart = Cart()
-            cart.profile = profile
-            cart.total = 0.0
-            cart.save()
-            cartItem.cart = cart
-        cartItem.quantity = int(request.POST.get('id_quantity'))
-        cartItem.material = request.POST.get('id_material')
-        cartItem.good = Product.objects.get(id=request.POST.get('id_good_id'))
-        cartItem.save()
-        return redirect('/good/{0}'.format(request.POST.get('id_good_id')))
-    else:
-        return HttpResponseBadRequest()
-
-@login_required(login_url='login')
-def buy(request):
-    if request.method == "POST" and request.user.is_authenticated:
-        profile = Profile.objects.filter(user=request.user)[0]
-        cart = list(filter(lambda x: x.is_active, Cart.objects.filter(profile=profile)))[0]
-        cart.is_active = False
-        cart.save()
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-        return HttpResponseBadRequest()
 
 
 

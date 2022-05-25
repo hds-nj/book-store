@@ -1,27 +1,6 @@
 {% load static %}
 <div class="col-lg-4">
-    <div class="sidebar">
-        <div class="sidebar-widget">
-            <div class="single-bio">
-                <div class="single-bio-img">
-                    <img src="{% static 'template/img/user.jpg' %}" />
-                </div>
-                <div class="single-bio-text">
-                    <h3>نام نویسنده</h3>
-                    <p>
-                        لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد.
-                    </p>
-                </div>
-                <div class="single-bio-social">
-                    <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                    <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-        
+    <div class="sidebar">      
         <div class="sidebar-widget">
             <div class="search-widget">
                 <form>
@@ -32,13 +11,11 @@
         </div>
 
         <div class="sidebar-widget">
-            <h2 class="widget-title">آخرین پست</h2>
+            <h2 class="widget-title">آخرین کتاب</h2>
             <div class="recent-post">
-                {% for article in articles %}
+                {% for article in products %}
                 <div class="post-item">
-                    <div class="post-img">
-                        <img src="{{article.thumbnail.url}}" />
-                    </div>
+                    
                     <div class="post-text">
                         <a href="">{{article.title}}</a>
                         <div class="post-meta">
@@ -49,143 +26,7 @@
                 {% endfor%}
             </div>
         </div>
-
-        <div class="sidebar-widget">
-            <div class="image-widget">
-                <a href="#"><img src="{% static 'template/img/blog-1.jpg' %}" alt="Image"></a>
-            </div>
-        </div>
-
-        <div class="sidebar-widget">
-            <div class="tab-post">
-                <ul class="nav nav-pills nav-justified">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="pill" href="#featured">ویژه</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#popular">محبوب</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#latest">آخرین</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="featured" class="container tab-pane active">
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-1.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href=""> به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">ادمین</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="popular" class="container tab-pane fade">
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-1.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href="">به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-2.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href=""> به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-3.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href=""> به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-4.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href=""> به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-5.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href="">لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود.</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="latest" class="container tab-pane fade">
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-1.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-2.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-item">
-                            <div class="post-img">
-                                <img src="{% static 'template/img/post-5.jpg' %}" />
-                            </div>
-                            <div class="post-text">
-                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                <div class="post-meta">
-                                    <p>توسط<a href="">Admin</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sidebar-widget">
-            <div class="image-widget">
-                <a href="#"><img src="{% static 'template/img/blog-2.jpg' %}" alt="Image"></a>
-            </div>
-        </div>
-
+        
         <div class="sidebar-widget">
             <h2 class="widget-title">دستبندی ها</h2>
             <div class="category-widget">
@@ -197,26 +38,6 @@
             </div>
         </div>
 
-        <div class="sidebar-widget">
-            <div class="image-widget">
-                <a href="#"><img src="{% static 'template/img/blog-3.jpg' %}" alt="Image"></a>
-            </div>
-        </div>
-
-        <div class="sidebar-widget">
-            <h2 class="widget-title">برچسب ها</h2>
-            <div class="tag-widget">
-                <a href="">حواشی</a>
-            </div>
-        </div>
-
-        <div class="sidebar-widget">
-            <h2 class="widget-title">متن میانبر</h2>
-            <div class="text-widget">
-                <p>
-                    لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد.
-                </p>
-            </div>
-        </div>
+       
     </div>
 </div>

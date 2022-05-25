@@ -25,30 +25,30 @@
             <div class="container">
                 <div class="section-header text-center">
                     <p>فروشگاه</p>
-                    <h2>آخرین محصولات</h2>
+                    <h2>آخرین کتاب ها</h2>
                 </div>
-                <div class="row">
+                <div class="row book">
                     {% for p in products %}
                     <div class="col-lg-4">
-                        <img class="thumbnail" src="{{p.image.url}}">
+                        <div class="book-img">
+                            <img class="bookimg" src="{{p.image.url}}">
+                        </div>
                         <div class="box-element product">
                             <h6><strong>{{p.name}}</strong></h6>
                             <hr>
-                                        <form id="form-{{ product.slug }}">
+                            <form method="post" id="form-{{ p.slug}}">
                                             {% csrf_token %}
-                                            <input type="hidden" name="product" value="{{ product.id }}">
-                                        </form>
-                                            <a href="{% url 'add_to_cart' product.id %}">Add to cart</a>
-                                        <button class="btn btn-success disabled">
-                                             <i class="gb gb_highlight_off"></i>
-                                        </button>
-                            <a class="btn btn-outline-success" href="/{{p.slug}}">View</a>
-                            <h4 style="display: inline-block "><strong>{{p.price}}</strong></h4>
-            
+                                <input type="hidden" name="product" value="{{ p.id }}">
+                            </form>           
+                            <button  data-product="{{p.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">خرید</button>
+                            <a class="btn btn-outline-success" href="/{{p.slug}}">جزئیات</a>
+                            <a class="btn btn-outline-secondary" href="/{{p.category_to_sl}}">{{p.category_to_str}}</a>
+                            <h4 style="display: inline-block; float: right"><strong>{{p.price}}</strong></h4>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
+              </div>
               
                 <div class="row">
                     <div class="col-12">
@@ -71,12 +71,5 @@
 
 {% endblock %}
 {% block extra_js %}
-<script>
-function AddCart(slug) {
-    $.post(`/product/${slug}`, $(`#form-${slug}`).serialize(), function(data) {
-        alert(data.msg);
-        $(`#${slug}`).modal('hide');
-    })
-}
-</script>
+
 {% endblock  %}
