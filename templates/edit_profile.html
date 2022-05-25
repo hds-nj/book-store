@@ -11,9 +11,18 @@
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
-            {{request.user.first_name}}<br>
-            {{request.user.last_name}}<br>
-            {{request.user.username}}
+            <table>
+              <tr>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>نام کاربری</th>
+              </tr>
+              <tr>
+                <td>{{request.user.first_name}}</td>
+                <td>{{request.user.last_name}}</td>
+                <td>{{request.user.username}}</td>
+              </tr>
+            </table>
             {{ form.as_p }}
             <a href="{% url 'password' %}">تغییر پسورد</a>
           </div>

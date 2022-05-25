@@ -43,7 +43,7 @@ def shop(request , page=1):
         }
         return render(request,"books/shop.html",context)
 
-
+@login_required(login_url='login')
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -54,8 +54,9 @@ def cart(request):
         order = {'get_card_total':0 ,'get_cart_items':0}
         items = []    
     context ={'items':items , 'order':order , 'cartItem':cartItem}
-    return render(request , 'books/cart.html' , context )       
+    return render(request , 'books/cart.html' , context )
 
+@login_required(login_url='login')
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -68,7 +69,6 @@ def checkout(request):
 
 
 @login_required(login_url='login')
-
 def updateItem(request):
     decoded_data = request.body.decode('utf-8')
     data = json.loads(decoded_data)

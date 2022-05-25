@@ -8,9 +8,7 @@
 <div class="container">
     <div class="card">
         <div class="auth__header text-center">
-            <a href="/">
-                <img src="{% static 'images/icon.svg' %}" alt="icon" />
-            </a>
+            <br>
             <h3>ایجاد حساب کابری</h3>
         </div>
 
@@ -29,19 +27,18 @@
                 {% for error in field.errors %}
                 <p style="color: red;">{{error}}</p>
                 {% endfor %}
-
+                
             </div>
 
             {% endfor %}
           
             <div class="auth__actions">
-                <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+                <input class="btn btn-primary" type="submit" value="ثبت نام" />
             </div>
         </form>
         <div class="auth__alternative">
-            <p>Already have an Account?</p>
-            <button class="btn btn primary"> ورود </button>
-            <a href="{% url 'login' %}">Log In</a>
+            <p>حساب کاربری  دارید؟ / <a href="{% url 'login' %}">ورود</a>  </p>
+            
         </div>
     </div>
 </div>

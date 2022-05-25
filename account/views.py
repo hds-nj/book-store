@@ -90,8 +90,8 @@ def registerUser(request):
                 request, 'An error has occurred during registration')
     context = {'page': page, 'form': form}
     return render(request, 'login_register.html', context)
+    
 @login_required(login_url='login')
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
